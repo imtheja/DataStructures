@@ -98,13 +98,35 @@ class Questions:
                 intUpperIndex-=1
         return print(intMaxWater)
 
+    def LongestSubstring(self, strr):
+        #Apprach as we have to get the length through indexes, lets have dict object for reference
+        if len(strr)==0:
+            return 0
+
+        intMaxLength=0
+        intStartIndex=0
+        intRepeatingCharIndex=0
+        dictCharReference={}
+        for indx in range(len(strr)):
+            if strr[indx] in dictCharReference:
+                intRepeatingCharIndex=dictCharReference[strr[indx]]
+                dictCharReference[strr[indx]]=indx
+                if intRepeatingCharIndex >= intStartIndex:
+                    intStartIndex=intRepeatingCharIndex+1
+                intMaxLength=max(intMaxLength, (indx-intStartIndex)+1)
+            else:
+                dictCharReference[strr[indx]]=indx
+                intMaxLength=max(intMaxLength, (indx-intStartIndex)+1)
+        return print(intMaxLength)
+
 
 
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
 #TestInstance.NumRescueBoats([1,2], 3)
 #TestInstance.ValidMountainArray([0,3,2,1])
-TestInstance.ContainerWithMostWater([4,3,2,1,4])
-TestInstance.ContainerWithMostWater([1,1])
-TestInstance.ContainerWithMostWater([1,2,1])
+#TestInstance.ContainerWithMostWater([4,3,2,1,4])
+#TestInstance.ContainerWithMostWater([1,1])
+#TestInstance.ContainerWithMostWater([1,2,1])
+TestInstance.LongestSubstring("abcabcbb")
 #TestInstance.TwoSum([7,2,11,15], 9 )
