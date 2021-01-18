@@ -119,6 +119,56 @@ class Questions:
                 intMaxLength=max(intMaxLength, (indx-intStartIndex)+1)
         return print(intMaxLength)
 
+    def FirstBadVersion(self, n, firstBadValue):
+        intLeftIndex=1
+        intRightIndex=n
+        while intLeftIndex < intRightIndex:
+            intMidValue=(intLeftIndex+intRightIndex)//2
+            if intMidValue==firstBadValue:
+                intRightIndex=intMidValue
+            else:
+                intLeftIndex=intMidValue+1
+        print(intLeftIndex)
+        return intLeftIndex
+
+    def searchLeftRange(self, nums, target):
+        intLeftIndex=0
+        intRightIndex=len(nums)-1
+        while intLeftIndex <= intRightIndex:
+            intMidValue=(intLeftIndex+intRightIndex)//2
+            if nums[intMidValue]==target and nums[intMidValue-1]!=target:
+                print(intMidValue)
+                return intMidValue
+            elif nums[intMidValue]==target and nums[intMidValue-1]==target:
+                intRightIndex = intMidValue-1
+            elif nums[intMidValue]< target:
+                intLeftIndex=intMidValue+1
+            elif nums[intMidValue]>target:
+                intRightIndex=intMidValue-1
+        print("-1")
+        return -1
+
+    def searchRightRange(self, nums, target):
+        intLeftIndex=0
+        intRightIndex=len(nums)-1
+        while intLeftIndex <= intRightIndex:
+            intMidValue=(intLeftIndex+intRightIndex)//2
+            if nums[intMidValue]==target and nums[intMidValue+1]!=target:
+                print(intMidValue)
+                return intMidValue
+            elif nums[intMidValue]==target and nums[intMidValue+1]==target:
+                intLeftIndex = intMidValue+1
+            elif nums[intMidValue]< target:
+                intLeftIndex=intMidValue+1
+            elif nums[intMidValue]>target:
+                intRightIndex=intMidValue-1
+        print("-1")
+        return -1
+
+    def searchRange(self, nums, target):
+        return [Questions.searchLeftRange(self, nums, target), Questions.searchRightRange(self, nums, target)]
+
+
 
 
 TestInstance=Questions()
@@ -128,5 +178,6 @@ TestInstance=Questions()
 #TestInstance.ContainerWithMostWater([4,3,2,1,4])
 #TestInstance.ContainerWithMostWater([1,1])
 #TestInstance.ContainerWithMostWater([1,2,1])
-TestInstance.LongestSubstring("abcabcbb")
+#TestInstance.LongestSubstring("abcabcbb")
 #TestInstance.TwoSum([7,2,11,15], 9 )
+
