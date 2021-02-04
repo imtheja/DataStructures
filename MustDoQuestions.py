@@ -169,8 +169,79 @@ class Questions:
         return [Questions.searchLeftRange(self, nums, target), Questions.searchRightRange(self, nums, target)]
 
 
+    def productExceptSelf(self, nums):
+        output = [1]
+        print ("output:", output)
+        for n in nums[:len(nums)-1]:
+            print ("output[-1] * n: ", output[-1] * n)
+            output.append(output[-1] * n)
+            print ("output.append: ", output)
+        running_m = 1
+        for i in range(len(nums)-2, -1, -1):
+            print ("running_m: ", running_m)
+            running_m *= nums[i+1]
+            print ("running_m*: ", running_m)
+            output[i] *= running_m
+        print(output)
 
+        return output
 
+    def productExceptSelf(self,nums):
+        listResult=[1]
+        for i in range(1, len(nums)):
+            listResult.append(nums[i-1]*listResult[i-1])
+        print(listResult)
+        intRunningProduct=1
+        for i in range(len(nums)-1, -1, -1):
+            listResult[i] *= intRunningProduct
+            intRunningProduct *= nums[i]
+        print(listResult)
+
+    def findDuplicates(self, nums):
+        output = []
+        for i in range(len(nums)):
+            print("i:", i)
+            index = abs(nums[i]) - 1
+            print("index:", index)
+            if nums[index] < 0:
+                output.append(index + 1)
+                print("output:", output)
+
+            nums[index] = - nums[index]
+            print("nums[index]:", nums[index])
+        print("final output:", output)
+        return output
+
+    def findDuplicatesInGivenRange(self, nums):
+        listResult=[]
+        for i in range(len(nums)):
+            intGenerateIndex = abs(nums[i])-1
+            if nums[intGenerateIndex] < 0 :
+                listResult.append(intGenerateIndex+1)
+            else:
+                nums[intGenerateIndex] = -nums[intGenerateIndex]
+        print (listResult)
+        return listResult
+
+    def setMatrixZero(self, matrix):
+        intRowsLength=len(matrix)
+        intColumnsLength=len(matrix[0])
+
+        def setIndexToZero(rows, cols):
+            for column in range(intColumnsLength):
+                if matrix[rows][column] !=0:
+                    matrix[rows][column]='0'
+            for row in range(intRowsLength):
+                if matrix[row][cols]!=0:
+                    matrix[row][cols]='0'
+
+        for i in range(intRowsLength):
+            for j in range(intColumnsLength):
+                if matrix[i][j]==0:
+                    print(i,j)
+                    setIndexToZero(i, j)
+        print (matrix)
+        return matrix
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
 #TestInstance.NumRescueBoats([1,2], 3)
@@ -180,4 +251,7 @@ TestInstance=Questions()
 #TestInstance.ContainerWithMostWater([1,2,1])
 #TestInstance.LongestSubstring("abcabcbb")
 #TestInstance.TwoSum([7,2,11,15], 9 )
+#TestInstance.productExceptSelf([1,2,3,4,5,6,7,8,9])
+#TestInstance.findDuplicatesInGivenRange([4,3,2,7,8,2,3,1])
+TestInstance.setMatrixZero([[1,1,1],[1,0,1],[1,1,1]])
 
