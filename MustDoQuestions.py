@@ -272,8 +272,42 @@ class Questions:
                     spiral_order.append(matrix[i][first_col])
                     i -= 1
                 first_col += 1
-
+        print(spiral_order)
         return spiral_order
+
+    def spiral(self, matrix):
+        intCounter=intfirstrow=intfirstcol=0
+        intlastrow=len(matrix)-1
+        intlastcol=len(matrix[0])-1
+        listSpiral=[]
+
+        while intfirstrow <=intlastrow and intfirstcol <=intlastcol:
+            for i in range(intfirstrow, intlastcol+1):
+                listSpiral.append(matrix[intfirstrow][i])
+            intfirstrow+=1
+
+            for i in range(intfirstrow, intlastrow+1):
+                listSpiral.append(matrix[i][intlastcol])
+            intlastcol-=1
+
+            if intfirstrow <= intlastrow:
+                i=intlastcol
+                while i>=intfirstcol:
+                    listSpiral.append(matrix[intlastrow][i])
+                    i-=1
+                intlastrow-=1
+            if intfirstcol <=intlastcol:
+                i=intlastrow
+                while i>=intfirstrow:
+                    listSpiral.append(matrix[i][intfirstcol])
+                    i-=1
+                intfirstcol+=1
+        print(listSpiral)
+        return listSpiral
+
+
+
+
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
 #TestInstance.NumRescueBoats([1,2], 3)
@@ -285,5 +319,9 @@ TestInstance=Questions()
 #TestInstance.TwoSum([7,2,11,15], 9 )
 #TestInstance.productExceptSelf([1,2,3,4,5,6,7,8,9])
 #TestInstance.findDuplicatesInGivenRange([4,3,2,7,8,2,3,1])
-TestInstance.setMatrixZero([[1,1,1],[1,0,1],[1,1,1]])
+TestInstance.spiralOrder([[1,1,1],[1,0,1],[1,1,1]])
+TestInstance.spiral([[1,1,1],[1,0,1],[1,1,1]])
+
+
+
 
