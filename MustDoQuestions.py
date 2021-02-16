@@ -305,7 +305,13 @@ class Questions:
         print(listSpiral)
         return listSpiral
 
-
+    def rotateMatrix(self, matrix):
+        matrix.reverse()
+        for i in range(len(matrix)):
+            for j in range(i+1, len(matrix)):
+                matrix[j][i], matrix[i][j]=matrix[i][j], matrix[j][i]
+        print(matrix)
+        return matrix
 
 
 TestInstance=Questions()
@@ -319,9 +325,10 @@ TestInstance=Questions()
 #TestInstance.TwoSum([7,2,11,15], 9 )
 #TestInstance.productExceptSelf([1,2,3,4,5,6,7,8,9])
 #TestInstance.findDuplicatesInGivenRange([4,3,2,7,8,2,3,1])
-TestInstance.spiralOrder([[1,1,1],[1,0,1],[1,1,1]])
-TestInstance.spiral([[1,1,1],[1,0,1],[1,1,1]])
-
+#TestInstance.spiralOrder([[1,1,1],[1,0,1],[1,1,1]])
+#TestInstance.spiral([[1,1,1],[1,0,1],[1,1,1]])
+TestInstance.rotate([[1,2,3],[4,5,6],[7,8,9]])
+TestInstance.rotateMatrix([[1,2,3],[4,5,6],[7,8,9]])
 
 
 
