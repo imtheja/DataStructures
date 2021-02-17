@@ -313,6 +313,25 @@ class Questions:
         print(matrix)
         return matrix
 
+    def firstMissing(self, nums):
+        if not nums:
+            print("1")
+            return 1
+        listReference=[False]*(len(nums)+1)
+
+        for i in nums:
+            if 0 < i <= len(nums):
+                listReference[i]=True
+
+        for i in range(1, len(listReference)):
+            if not listReference[i]:
+                print(i)
+                return i
+        if not listReference:
+            print("1")
+            return 1
+        return print(len(listReference))
+
 
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
@@ -327,8 +346,8 @@ TestInstance=Questions()
 #TestInstance.findDuplicatesInGivenRange([4,3,2,7,8,2,3,1])
 #TestInstance.spiralOrder([[1,1,1],[1,0,1],[1,1,1]])
 #TestInstance.spiral([[1,1,1],[1,0,1],[1,1,1]])
-TestInstance.rotate([[1,2,3],[4,5,6],[7,8,9]])
-TestInstance.rotateMatrix([[1,2,3],[4,5,6],[7,8,9]])
-
+#TestInstance.rotate([[1,2,3],[4,5,6],[7,8,9]])
+#TestInstance.rotateMatrix([[1,2,3],[4,5,6],[7,8,9]])
+TestInstance.firstMissing([3,4,-1,1])
 
 
