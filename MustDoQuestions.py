@@ -347,6 +347,24 @@ class Questions:
 
 
 
+    #Binary Search
+
+    def searchL(self, nums, target):
+        intLength=len(nums)
+        intLeftIndex=0
+        intRightIndex=intLength-1
+
+        while intLeftIndex <=intRightIndex:
+            intMidvalue=(intLeftIndex+intRightIndex)//2
+            if nums[intMidvalue]==target:
+                return print(intMidvalue)
+            elif nums[intMidvalue] > target:
+                intRightIndex=intMidvalue-1
+            else:
+                intLeftIndex=intMidvalue+1
+
+        return -1
+
 
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
@@ -364,6 +382,6 @@ TestInstance=Questions()
 #TestInstance.rotate([[1,2,3],[4,5,6],[7,8,9]])
 #TestInstance.rotateMatrix([[1,2,3],[4,5,6],[7,8,9]])
 #TestInstance.firstMissing([3,4,-1,1])
-TestInstance.longestConsequtive([100,4,200,1,3,2, 201, 205, 203, 204, 202])
-
+#TestInstance.longestConsequtive([100,4,200,1,3,2])
+TestInstance.searchL([-1,0,3,5,9,12], 9)
 
