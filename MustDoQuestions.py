@@ -332,6 +332,21 @@ class Questions:
             return 1
         return print(len(listReference))
 
+    def longestConsequtive(self, nums):
+        if not nums: return 0
+        numsSet=set(nums)
+        length=0
+        maxlength=0
+        for i in nums:
+            if i-1 not in numsSet:
+                length=0
+                while i+length in numsSet:
+                    length+=1
+                maxlength=max(length, maxlength)
+        return print(maxlength)
+
+
+
 
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
@@ -348,6 +363,7 @@ TestInstance=Questions()
 #TestInstance.spiral([[1,1,1],[1,0,1],[1,1,1]])
 #TestInstance.rotate([[1,2,3],[4,5,6],[7,8,9]])
 #TestInstance.rotateMatrix([[1,2,3],[4,5,6],[7,8,9]])
-TestInstance.firstMissing([3,4,-1,1])
+#TestInstance.firstMissing([3,4,-1,1])
+TestInstance.longestConsequtive([100,4,200,1,3,2, 201, 205, 203, 204, 202])
 
 
