@@ -394,10 +394,22 @@ class Questions:
 
 
     def findD(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        '''
         for i in range(len(nums)-1):
-            if nums[i] in nums[:i] or nums[i] in nums[i+1]:
-                return i
-        return None
+            if nums[i] in nums[:i] or nums[i] in nums[i+1:]:
+                return nums[i]
+        return None '''
+
+        for i in range(len(nums)):
+            intIndex=abs(nums[i])
+            if nums[intIndex-1] < 0:
+                return intIndex
+            else:
+                nums[intIndex-1]=-nums[intIndex-1]
 
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
@@ -418,5 +430,5 @@ TestInstance=Questions()
 #TestInstance.longestConsequtive([100,4,200,1,3,2])
 #TestInstance.searchL([-1,0,3,5,9,12], 9)
 #TestInstance.NextGreatLetter(["c", "f", "j"], "k")
-TestInstance.findMountainI([0,1,0])
-
+#TestInstance.findMountainI([0,1,0])
+TestInstance.findD([1,1])
