@@ -393,6 +393,12 @@ class Questions:
         return print("-1")
 
 
+    def findD(self, nums):
+        for i in range(len(nums)-1):
+            if nums[i] in nums[:i] or nums[i] in nums[i+1]:
+                return i
+        return None
+
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
 #TestInstance.NumRescueBoats([1,2], 3)
