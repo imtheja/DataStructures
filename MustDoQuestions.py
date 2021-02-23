@@ -379,6 +379,19 @@ class Questions:
 
         return print(nums[intLeftIndex])
 
+    def findMountainI(self, nums):
+        intLeftIndex=0
+        intRightIndex=len(nums)-1
+        while intLeftIndex<=intRightIndex:
+            intMid=(intLeftIndex+intRightIndex)//2
+            if nums[intMid-1] < nums[intMid] and nums[intMid] > nums[intMid+1]:
+                return print(intMid)
+            elif nums[intMid]<nums[intMid+1]:
+                intLeftIndex=intMid+1
+            elif nums[intMid] < nums[intMid-1]:
+                intRightIndex =intMid-1
+        return print("-1")
+
 
 TestInstance=Questions()
 #TestInstance.MoveZeros2([1,0,2,0,3,0,4,0,5,0,0,0,7,8,9])
@@ -398,5 +411,6 @@ TestInstance=Questions()
 #TestInstance.firstMissing([3,4,-1,1])
 #TestInstance.longestConsequtive([100,4,200,1,3,2])
 #TestInstance.searchL([-1,0,3,5,9,12], 9)
-TestInstance.NextGreatLetter(["c", "f", "j"], "k")
+#TestInstance.NextGreatLetter(["c", "f", "j"], "k")
+TestInstance.findMountainI([0,1,0])
 
