@@ -32,18 +32,35 @@ class slidingWindow:
 
 
 
+    def longestSubStringWithKChars(self, str, k):
+        intStringLength=len(str)
+        intMaxLength=0
+        intStartIndex=0
+        dictPlaceHolder={}
 
+        for i in range(intStringLength):
+            if str[i] not in dictPlaceHolder:
+                dictPlaceHolder[str[i]]=1
+            else:
+                dictPlaceHolder[str[i]]+=1
 
+            while len(dictPlaceHolder) > k:
+                if dictPlaceHolder[str[intStartIndex]]==1:
+                    del dictPlaceHolder[str[intStartIndex]]
+                else:
+                    dictPlaceHolder[str[intStartIndex]] -=1
+                intStartIndex+=1
 
+            if len(dictPlaceHolder)==k:
+                intMaxLength = max(intMaxLength, sum(dictPlaceHolder.values()))
 
-
-
-
+        return intMaxLength
 
 
 
 
 TestInstance=slidingWindow()
-print(TestInstance.maximumSumSubArray([2,1,5,1,3,2], 3))
-print(TestInstance.minimumSubArray([2, 1, 5, 2, 3, 2], 7))
+#print(TestInstance.maximumSumSubArray([2,1,5,1,3,2], 3))
+#print(TestInstance.minimumSubArray([2, 1, 5, 2, 3, 2], 7))
+print(TestInstance.longestSubStringWithKChars("araaci", 1))
 
