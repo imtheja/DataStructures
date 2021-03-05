@@ -56,11 +56,31 @@ class slidingWindow:
 
         return intMaxLength
 
+    def fruitsIntoBasket(self, tree):
+        intStringLength=len(tree)
+        intMaxLength=0
+        intStartIndex=0
+        dictPlaceHolder={}
 
+        for i in range(intStringLength):
+            if tree[i] not in dictPlaceHolder:
+                dictPlaceHolder[tree[i]]=1
+            else:
+                dictPlaceHolder[tree[i]]+=1
 
+            while len(dictPlaceHolder) > 2:
+                if dictPlaceHolder[tree[intStartIndex]]==1:
+                    del dictPlaceHolder[tree[intStartIndex]]
+                else:
+                    dictPlaceHolder[tree[intStartIndex]] -=1
+                intStartIndex+=1
+
+            intMaxLength = max(intMaxLength, sum(dictPlaceHolder.values()))
+        return intMaxLength
 
 TestInstance=slidingWindow()
 #print(TestInstance.maximumSumSubArray([2,1,5,1,3,2], 3))
 #print(TestInstance.minimumSubArray([2, 1, 5, 2, 3, 2], 7))
-print(TestInstance.longestSubStringWithKChars("araaci", 1))
+#print(TestInstance.longestSubStringWithKChars("araaci", 1))
+print(TestInstance.fruitsIntoBasket([0,1,2,2]))
 
