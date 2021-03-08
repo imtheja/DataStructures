@@ -78,9 +78,51 @@ class slidingWindow:
             intMaxLength = max(intMaxLength, sum(dictPlaceHolder.values()))
         return intMaxLength
 
+    def noRepeatSubString(self,str):
+        intStartIndex=0
+        dictPlaceHolder={}
+        intStrLength=len(str)
+        intMaxLength=0
+
+        for i in range(intStrLength):
+            if str[i] not in dictPlaceHolder:
+                dictPlaceHolder[str[i]]=1
+            else:
+                dictPlaceHolder[str[i]]+=1
+
+            while dictPlaceHolder[str[i]] > 1:
+                if dictPlaceHolder[str[intStartIndex]]>1:
+                    dictPlaceHolder[str[intStartIndex]]-=1
+                elif dictPlaceHolder[str[intStartIndex]]==1:
+                    del dictPlaceHolder[str[intStartIndex]]
+                intStartIndex+=1
+
+            intMaxLength=max(intMaxLength, sum(dictPlaceHolder.values()))
+        return intMaxLength
+
+    def longestSubstringWithSubstitution(self, str, k):
+        intMaxLength, intStartIndex, intCount=0, 0, 0
+        intStringLength=len(str)
+        dictPlaceHolder={}
+        for i in range(intStringLength):
+            if str[i] not in dictPlaceHolder:
+                dictPlaceHolder[str[i]]=1
+            else:
+                dictPlaceHolder[str[i]]+=1
+
+            intCount=max(dictPlaceHolder.values())
+            while i-intStartIndex+1-intCount > k:
+                dictPlaceHolder[str[intStartIndex]]-=1
+                intStartIndex+=1
+
+            intMaxLength=max(intMaxLength, i-intStartIndex+1)
+        return intMaxLength
+
 TestInstance=slidingWindow()
 #print(TestInstance.maximumSumSubArray([2,1,5,1,3,2], 3))
 #print(TestInstance.minimumSubArray([2, 1, 5, 2, 3, 2], 7))
 #print(TestInstance.longestSubStringWithKChars("araaci", 1))
-print(TestInstance.fruitsIntoBasket([0,1,2,2]))
+#print(TestInstance.fruitsIntoBasket([0,1,2,2]))
+#print(TestInstance.noRepeatSubString("abccde"))
+print(TestInstance.longestSubstringWithSubstitution("abccde", 1))
 
