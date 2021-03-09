@@ -124,5 +124,55 @@ TestInstance=slidingWindow()
 #print(TestInstance.longestSubStringWithKChars("araaci", 1))
 #print(TestInstance.fruitsIntoBasket([0,1,2,2]))
 #print(TestInstance.noRepeatSubString("abccde"))
-print(TestInstance.longestSubstringWithSubstitution("abccde", 1))
+#print(TestInstance.longestSubstringWithSubstitution("abccde", 1))
 
+class TwoPointers:
+    def paitWithTargetSum(self, nums, target):
+        intLengthNums=len(nums)
+        intLeftPointer=0
+        intRightPointer=intLengthNums-1
+
+        while intLeftPointer<=intRightPointer:
+            if nums[intLeftPointer]+nums[intRightPointer]==target:
+                return [intLeftPointer, intRightPointer]
+            elif nums[intLeftPointer]+nums[intRightPointer] < target:
+                intLeftPointer+=1
+            else:
+                intRightPointer-=1
+        return [-1,-1]
+
+    def noDuplicatesArrayLength(self, nums):
+        intLengthNums=len(nums)
+        intNewArrayLength=1
+        for i in range (1, intLengthNums):
+            if nums[i-1] !=nums[i]:
+                intNewArrayLength+=1
+        return intNewArrayLength
+
+    def squaringASortedArray(self, nums):
+        intLengthNums=len(nums)
+        intLeftIndex=0
+        intRightIndex=intLengthNums-1
+        intSquareIndex=intRightIndex
+        listSquares=[0]*intLengthNums
+
+        while intLeftIndex <= intRightIndex:
+            if nums[intLeftIndex]**2 <= nums[intRightIndex]**2:
+                listSquares[intSquareIndex]=nums[intRightIndex]**2
+                intRightIndex-=1
+                intSquareIndex-=1
+            elif nums[intLeftIndex]**2 > nums[intRightIndex]**2:
+                listSquares[intSquareIndex]= nums[intLeftIndex]**2
+                intSquareIndex-=1
+                intLeftIndex+=1
+        return listSquares
+
+
+
+
+
+
+TestInstance=TwoPointers()
+#print(TestInstance.paitWithTargetSum([2,5,9,11], 11))
+#print(TestInstance.noDuplicatesArrayLength([2, 2, 2, 11]))
+print(TestInstance.squaringASortedArray([-3, -1, 0, 1, 2]))
