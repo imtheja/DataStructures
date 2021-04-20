@@ -117,9 +117,27 @@ class HundredDaysChallenge:
             intMaxFruits = max(intMaxFruits, sum(dictStaging.values()))
         return intMaxFruits
 
+    def longestSubstringWithNoRepeats(self, string):
+        intStartIndex=intLongestSubString=0
+        dictStaging={}
+        for intEndString in range(len(string)):
+            if string[intEndString] in dictStaging:
+                dictStaging[string[intEndString]]+=1
+            else:
+                dictStaging[string[intEndString]]=1
+
+            while len(dictStaging) < sum(dictStaging.values()):
+                if dictStaging[string[intStartIndex]] == 1:
+                    del dictStaging[string[intStartIndex]]
+                else:
+                    dictStaging[string[intStartIndex]]-=1
+                intStartIndex+=1
+            intLongestSubString = max(intLongestSubString, sum(dictStaging.values()))
+        return intLongestSubString
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
 #print(resultObject.longestSubstringWithKDistinctChars("araaci", 1))
 #print(resultObject.longestSubstringAfterReplacingKLetters("abccde", 1))
 #print(resultObject.maximumFruitsInBaskets(['A', 'B', 'C', 'B', 'B', 'C']))
+print(resultObject.longestSubstringWithNoRepeats("abccde"))
