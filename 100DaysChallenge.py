@@ -116,7 +116,9 @@ class HundredDaysChallenge:
                 intStartIndex+=1
             intMaxFruits = max(intMaxFruits, sum(dictStaging.values()))
         return intMaxFruits
-
+    '''
+    Given a string, find the length of the longest substring which has no repeating characters.
+    '''
     def longestSubstringWithNoRepeats(self, string):
         intStartIndex=intLongestSubString=0
         dictStaging={}
@@ -135,6 +137,11 @@ class HundredDaysChallenge:
             intLongestSubString = max(intLongestSubString, sum(dictStaging.values()))
         return intLongestSubString
 
+    '''
+    Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, 
+    find the length of the longest contiguous subarray having all 1s.
+    '''
+
     def lengthOfLongestSubstringWithOnes(self, nums, k):
         intStartIndex = intMaxLength = intOnesCount=0
         for intEndIndex in range(len(nums)):
@@ -147,6 +154,40 @@ class HundredDaysChallenge:
             intMaxLength=max(intMaxLength, intEndIndex-intStartIndex+1)
         return intMaxLength
 
+    '''
+    Given a string and a pattern, find out if the string contains any permutation of the pattern.
+    '''
+    def determinePermutationPattern(self, string, pattern):
+        dictString = dictPattern = {}
+        for patternChar in pattern:
+            if patternChar not in dictPattern:
+                dictPattern[patternChar]=1
+            else:
+                dictPattern[patternChar]+=1
+
+        for stringIndex in range(len(string)):
+            if stringIndex < len(pattern):
+                if string[stringIndex] not in dictString:
+                    dictString[string[stringIndex]]=1
+                else:
+                    dictString[string[stringIndex]]+=1
+            else:
+                if dictString[string[stringIndex-len(pattern)]]==1:
+                    del dictString[string[stringIndex-len(pattern)]]
+                else:
+                    dictString[string[stringIndex-len(pattern)]]-=1
+
+            if string[stringIndex] not in dictString:
+                dictString[string[stringIndex]]=1
+            else:
+                dictString[string[stringIndex]]+=1
+
+            if dictString == dictPattern:
+                return True
+        return False
+
+
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -154,4 +195,5 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.longestSubstringAfterReplacingKLetters("abccde", 1))
 #print(resultObject.maximumFruitsInBaskets(['A', 'B', 'C', 'B', 'B', 'C']))
 #print(resultObject.longestSubstringWithNoRepeats("abccde"))
-print(resultObject.lengthOfLongestSubstringWithOnes([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2))
+#print(resultObject.lengthOfLongestSubstringWithOnes([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2))
+print(resultObject.determinePermutationPattern("aaacb", "abc"))
