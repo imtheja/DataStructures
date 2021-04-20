@@ -134,10 +134,24 @@ class HundredDaysChallenge:
                 intStartIndex+=1
             intLongestSubString = max(intLongestSubString, sum(dictStaging.values()))
         return intLongestSubString
+
+    def lengthOfLongestSubstringWithOnes(self, nums, k):
+        intStartIndex = intMaxLength = intOnesCount=0
+        for intEndIndex in range(len(nums)):
+            if nums[intEndIndex]==1:
+                intOnesCount+=1
+            while intEndIndex-intStartIndex+1 - intOnesCount > k:
+                if nums[intStartIndex]==1:
+                    intOnesCount-=1
+                intStartIndex+=1
+            intMaxLength=max(intMaxLength, intEndIndex-intStartIndex+1)
+        return intMaxLength
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
 #print(resultObject.longestSubstringWithKDistinctChars("araaci", 1))
 #print(resultObject.longestSubstringAfterReplacingKLetters("abccde", 1))
 #print(resultObject.maximumFruitsInBaskets(['A', 'B', 'C', 'B', 'B', 'C']))
-print(resultObject.longestSubstringWithNoRepeats("abccde"))
+#print(resultObject.longestSubstringWithNoRepeats("abccde"))
+print(resultObject.lengthOfLongestSubstringWithOnes([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2))
