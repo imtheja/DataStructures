@@ -186,6 +186,36 @@ class HundredDaysChallenge:
                 return True
         return False
 
+    '''
+    Given a string and a pattern, find out if the string contains any permutation of the pattern.
+    Above problem, but in pure sliding window approach  "aaacb", "abc"
+    '''
+    def findPermutation(self, string, pattern):
+        dictPattern={}
+        intStartIndex=0
+        intPatternMatched=0
+        for char in pattern:
+            if char not in dictPattern:
+                dictPattern[char]=1
+            else:
+                dictPattern[char]+=1
+
+        for intEndIndex in range(len(string)):
+            if string[intEndIndex] in dictPattern:
+                dictPattern[string[intEndIndex]] -= 1
+                if dictPattern[string[intEndIndex]]==0:
+                    intPatternMatched+=1
+
+            if intPatternMatched == len(dictPattern):
+                return True
+
+            if intEndIndex > len(pattern)-1:
+                if string[intStartIndex] in dictPattern:
+                    if dictPattern[string[intStartIndex]]==0:
+                        intPatternMatched-=1
+                    dictPattern[string[intStartIndex]]+=1
+                intStartIndex+=1
+        return False
 
 
 resultObject=HundredDaysChallenge()
@@ -196,4 +226,5 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.maximumFruitsInBaskets(['A', 'B', 'C', 'B', 'B', 'C']))
 #print(resultObject.longestSubstringWithNoRepeats("abccde"))
 #print(resultObject.lengthOfLongestSubstringWithOnes([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2))
-print(resultObject.determinePermutationPattern("aaacb", "abc"))
+#print(resultObject.determinePermutationPattern("aaacb", "abc"))
+print(resultObject.findPermutation("bcdxabcdy ", "bcdyabcdx"))
