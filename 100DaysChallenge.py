@@ -209,7 +209,7 @@ class HundredDaysChallenge:
             if intPatternMatched == len(dictPattern):
                 return True
 
-            if intEndIndex > len(pattern)-1:
+            if intEndIndex >= len(pattern)-1:
                 if string[intStartIndex] in dictPattern:
                     if dictPattern[string[intStartIndex]]==0:
                         intPatternMatched-=1
@@ -217,6 +217,36 @@ class HundredDaysChallenge:
                 intStartIndex+=1
         return False
 
+    '''
+    Given a string and a pattern, find all anagrams of the pattern in the given string.
+    "ppqp", Pattern="pq", abbcabc
+    '''
+    def anagramInString(self, string, pattern):
+        intStartIndex=0
+        intMatchedCount=0
+        dictPattern={}
+        listResult=[]
+
+        for char in pattern:
+            if char not in dictPattern:
+                dictPattern[char]=1
+            else:
+                dictPattern[char]+=1
+
+        for intEndIndex in range(len(string)):
+            if string[intEndIndex] in dictPattern:
+                dictPattern[string[intEndIndex]]-=1
+                if dictPattern[string[intEndIndex]] == 0:
+                    intMatchedCount+=1
+            if intMatchedCount == len(dictPattern):
+                listResult.append(intStartIndex)
+            if intEndIndex >= len(pattern)-1:
+                if string[intStartIndex] in dictPattern:
+                    if dictPattern[string[intStartIndex]] == 0:
+                        intMatchedCount-=1
+                    dictPattern[string[intStartIndex]]+=1
+                intStartIndex+=1
+        return listResult
 
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
@@ -227,4 +257,5 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.longestSubstringWithNoRepeats("abccde"))
 #print(resultObject.lengthOfLongestSubstringWithOnes([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2))
 #print(resultObject.determinePermutationPattern("aaacb", "abc"))
-print(resultObject.findPermutation("bcdxabcdy ", "bcdyabcdx"))
+#print(resultObject.findPermutation("bcdxabcdy ", "bcdyabcdx"))
+#print(resultObject.anagramInString("abbcabc ", "abc"))
