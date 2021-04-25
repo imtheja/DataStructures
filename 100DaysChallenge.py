@@ -248,6 +248,40 @@ class HundredDaysChallenge:
                 intStartIndex+=1
         return listResult
 
+
+    '''
+    Given a string and a pattern, find the smallest substring in the given string 
+    which has all the characters of the given pattern.
+    '''
+    def smallestSubstringWPattern(self, string, pattern):
+        intStartIndex, intMinLength, intSubSStartPostion, intMatched = 0, len(string)+1, 0, 0
+        strStartChar=""
+        dictPattern={}
+
+        for character in pattern:
+            if character not in dictPattern:
+                dictPattern[character] = 1
+            else:
+                dictPattern[character] += 1
+
+        for intEndIndex in range(len(string)):
+            if string[intEndIndex] in dictPattern:
+                dictPattern[string[intEndIndex]] -=1
+                if dictPattern[string[intEndIndex]] >=0:
+                    intMatched +=1
+
+            while intMatched == len(pattern):
+                if intMinLength > (intEndIndex -intStartIndex + 1):
+                    intMinLength = intEndIndex -intStartIndex + 1
+                intSubSStartPostion = intStartIndex
+                strStartChar = string[intStartIndex]
+                intStartIndex+=1
+                if strStartChar in dictPattern:
+                    if dictPattern[strStartChar] == 0:
+                        intMatched-=1
+                        
+
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
