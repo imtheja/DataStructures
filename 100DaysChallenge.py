@@ -266,20 +266,25 @@ class HundredDaysChallenge:
 
         for intEndIndex in range(len(string)):
             if string[intEndIndex] in dictPattern:
-                dictPattern[string[intEndIndex]] -=1
-                if dictPattern[string[intEndIndex]] >=0:
-                    intMatched +=1
+                dictPattern[string[intEndIndex]] -= 1
+                if dictPattern[string[intEndIndex]] >= 0:
+                    intMatched += 1
 
             while intMatched == len(pattern):
                 if intMinLength > (intEndIndex -intStartIndex + 1):
                     intMinLength = intEndIndex -intStartIndex + 1
-                intSubSStartPostion = intStartIndex
+                    intSubSStartPostion = intStartIndex
                 strStartChar = string[intStartIndex]
-                intStartIndex+=1
+                intStartIndex += 1
                 if strStartChar in dictPattern:
                     if dictPattern[strStartChar] == 0:
-                        intMatched-=1
-                        
+                        intMatched -= 1
+                    dictPattern[strStartChar] += 1
+
+        if intMinLength > len(string):
+            return ""
+        else:
+            return string[intSubSStartPostion: intSubSStartPostion+intMinLength]
 
 
 resultObject=HundredDaysChallenge()
@@ -293,3 +298,4 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.determinePermutationPattern("aaacb", "abc"))
 #print(resultObject.findPermutation("bcdxabcdy ", "bcdyabcdx"))
 #print(resultObject.anagramInString("abbcabc ", "abc"))
+print(resultObject.smallestSubstringWPattern("abdabca ", "abc"))
