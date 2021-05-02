@@ -286,6 +286,42 @@ class HundredDaysChallenge:
         else:
             return string[intSubSStartPostion: intSubSStartPostion+intMinLength]
 
+    def findWordConcatenation(self, string, words):
+        if len(words) == 0 or len(words[0]) == 0:
+            return []
+
+        dictWordFrequency = {}
+        for word in words:
+            if word not in dictWordFrequency:
+                dictWordFrequency[word] = 0
+            dictWordFrequency[word]+=1
+
+        listResultIndices = []
+        intNumberOfWords = len(words)
+        intWordsLength = len(words[0])
+
+        for i in range(len(string)-intNumberOfWords*intWordsLength +1):
+            dictWordSeen = {}
+            for j in range(intNumberOfWords):
+                intWordIndex = i + j * intWordsLength
+                strWord = string[intWordIndex: intWordIndex + intWordsLength]
+
+                if strWord not in dictWordFrequency:
+                    break
+
+                if strWord not in dictWordSeen:
+                    dictWordSeen[strWord] = 0
+                dictWordSeen[strWord] += 1
+
+                if dictWordSeen[strWord] > dictWordFrequency.get(strWord,0):
+                    break
+
+                if j + 1 == intNumberOfWords:
+                    listResultIndices.append(i)
+
+        return listResultIndices
+
+
 
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
@@ -298,4 +334,6 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.determinePermutationPattern("aaacb", "abc"))
 #print(resultObject.findPermutation("bcdxabcdy ", "bcdyabcdx"))
 #print(resultObject.anagramInString("abbcabc ", "abc"))
-print(resultObject.smallestSubstringWPattern("abdabca ", "abc"))
+#print(resultObject.smallestSubstringWPattern("abdabca ", "abc"))
+#print(resultObject.smallestSubstringWPattern("abdabca ", "abc"))
+print(resultObject.findWordConcatenation("catfoxcat", ["cat", "fox"]))
