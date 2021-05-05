@@ -355,6 +355,13 @@ class HundredDaysChallenge:
             intResultListIndex -= 1
         return listResult
 
+    def removeDuplicates(self, nums):
+        intFinalCount=1
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i-1]:
+                intFinalCount+=1
+        return intFinalCount
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -371,5 +378,6 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.findWordConcatenation("catfoxcat", ["cat", "fox"]))
 
 #print(resultObject.pairWithTargetSum([1,2,3,4,5], 5))
-print(resultObject.squaringASortedArray([-2, -1, 0, 2, 3]))
+#print(resultObject.squaringASortedArray([-2, -1, 0, 2, 3]))
+print(resultObject.removeDuplicates([2, 2, 2, 11]))
 
