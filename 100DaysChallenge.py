@@ -362,6 +362,24 @@ class HundredDaysChallenge:
                 intFinalCount+=1
         return intFinalCount
 
+    def subarrayPLessThanTarget(self, nums, target):
+        intProduct = 1
+        listResult = []
+        intStartIndex = 0
+        for i in range(len(nums)):
+            intProduct *= nums[i]
+
+            while intProduct >= target and intStartIndex < len(nums):
+                intProduct /= nums[intStartIndex]
+                intStartIndex += 1
+
+            if intProduct < target:
+                temp=[]
+                for j in range(i, intStartIndex-1, -1):
+                    temp.append(nums[j])
+                    listResult.append(temp.copy())
+        return listResult
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -379,5 +397,6 @@ resultObject=HundredDaysChallenge()
 
 #print(resultObject.pairWithTargetSum([1,2,3,4,5], 5))
 #print(resultObject.squaringASortedArray([-2, -1, 0, 2, 3]))
-print(resultObject.removeDuplicates([2, 2, 2, 11]))
+#print(resultObject.removeDuplicates([2, 2, 2, 11]))
+print(resultObject.subarrayPLessThanTarget([2, 5, 3, 10], 30))
 
