@@ -1,6 +1,7 @@
 import math
 
 class HundredDaysChallenge:
+    # Pattern Sliding Window
     '''Given an array of positive numbers and a positive number ‘k’,
     find the maximum sum of any contiguous subarray of size ‘k’.
     '''
@@ -322,6 +323,37 @@ class HundredDaysChallenge:
         return listResultIndices
 
 
+    #Pattern Two Pointers Appraach
+    def pairWithTargetSum(self, nums, target):
+        """ finds out a pair in nums, who sum is equal
+            to given target and return in list
+        """
+        listResult=[]
+        intLeftIndex=0
+        intRightIndex=len(nums)-1
+
+        while intLeftIndex < intRightIndex:
+            if nums[intLeftIndex] + nums[intRightIndex] == target:
+                listResult = [intLeftIndex, intRightIndex]
+                return listResult
+            elif nums[intLeftIndex] + nums[intRightIndex] < target:
+                intLeftIndex += 1
+            else:
+                intRightIndex -= 1
+
+    def squaringASortedArray(self, nums):
+        intLeftIndex, intRightIndex = 0, len(nums)-1
+        intResultListIndex = len(nums)-1
+        listResult=[0]*len(nums)
+        while intLeftIndex <= intRightIndex:
+            if nums[intLeftIndex]**2 >= nums[intRightIndex]**2:
+                listResult[intResultListIndex] = nums[intLeftIndex]**2
+                intLeftIndex += 1
+            else:
+                listResult[intResultListIndex] = nums[intRightIndex]**2
+                intRightIndex -= 1
+            intResultListIndex -= 1
+        return listResult
 
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
@@ -336,4 +368,8 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.anagramInString("abbcabc ", "abc"))
 #print(resultObject.smallestSubstringWPattern("abdabca ", "abc"))
 #print(resultObject.smallestSubstringWPattern("abdabca ", "abc"))
-print(resultObject.findWordConcatenation("catfoxcat", ["cat", "fox"]))
+#print(resultObject.findWordConcatenation("catfoxcat", ["cat", "fox"]))
+
+#print(resultObject.pairWithTargetSum([1,2,3,4,5], 5))
+print(resultObject.squaringASortedArray([-2, -1, 0, 2, 3]))
+
