@@ -1,4 +1,8 @@
 import math
+class Node:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next= next
 
 class HundredDaysChallenge:
     # Pattern Sliding Window
@@ -380,6 +384,52 @@ class HundredDaysChallenge:
                     listResult.append(temp.copy())
         return listResult
 
+    """ Pattern Fast and Slow Pointers: 
+        Mostly LinkedList
+        Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not. 
+    """
+
+
+    def hascycle(self, head):
+        linkedLSlow, linkedLFast = head, head
+        while linkedLFast is not None and linkedLFast.next is not None:
+            linkedLFast=linkedLFast.next.next
+            linkedLSlow=linkedLSlow.next
+
+            if linkedLSlow == linkedLFast:
+                return True
+        return False
+
+    """ Given the head of a Singly LinkedList, write a method to return the middle node of the LinkedList."""
+
+    def middleNode(self, head):
+        linkedLSlow, linkedLFast = head, head
+        while linkedLFast is not None and linkedLFast.next is not None:
+            linkedLFast = linkedLFast.next.next
+            linkedLSlow = linkedLSlow.next
+        return linkedLSlow
+
+    """ Find happy number, 
+        after repeatedly replacing it with a number equal to the sum of the square of all of its digits, 
+        leads us to number ‘1’. All other (not-happy) numbers will never reach ‘1’. 
+    """
+    def square(self, num):
+        intNumSum=0
+        while num > 0:
+            intNumSum+= (num % 10)**2
+            num=num//10
+        return intNumSum
+
+    def happyNum(self, num):
+        intSlow, intFast=num, num
+        while True:
+            intSlow = resultObject.square(num)
+            intFast = resultObject.square(resultObject.square(num))
+
+            if intSlow == intFast:
+                break
+        return intSlow == 1
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -398,5 +448,11 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.pairWithTargetSum([1,2,3,4,5], 5))
 #print(resultObject.squaringASortedArray([-2, -1, 0, 2, 3]))
 #print(resultObject.removeDuplicates([2, 2, 2, 11]))
-print(resultObject.subarrayPLessThanTarget([2, 5, 3, 10], 30))
+#print(resultObject.subarrayPLessThanTarget([2, 5, 3, 10], 30))
 
+def main():
+    print(resultObject.happyNum(23))
+    print(resultObject.happyNum(12))
+    print(resultObject.happyNum(1045673))
+
+main()
