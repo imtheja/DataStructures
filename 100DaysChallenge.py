@@ -430,6 +430,44 @@ class HundredDaysChallenge:
                 break
         return intSlow == 1
 
+    """ Given the head of a Singly LinkedList, write a method to check if the LinkedList is a palindrome or not. """
+
+    def reverseLinkedList(self, head):
+        previousNode=None
+        while head is not None:
+            temp = head.next
+            head.next = previousNode
+            previousNode = head
+            head = temp
+        return previousNode
+
+    def printLinkedList(self, head):
+        while head is not None:
+            print(str(head.value) + " ", end='')
+            head = head.next
+
+    def isPalindrome(self, head):
+        linkedLS, linkedLF = head, head
+        while linkedLF is not None and linkedLF.next is not None:
+            linkedLF = linkedLF.next.next
+            linkedLS = linkedLS.next
+
+        linkedLSecondHalf = resultObject.reverseLinkedList(linkedLS)
+        linkedLSecondHalfCopy = linkedLSecondHalf
+
+        while head is not None and linkedLSecondHalf is not None:
+            print(head.value)
+            if head.value != linkedLSecondHalf.value:
+                break
+            head=head.next
+            linkedLSecondHalf=linkedLSecondHalf.next
+
+
+
+        if head is None or linkedLSecondHalf is None:
+            return True
+
+        return False
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -451,8 +489,12 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.subarrayPLessThanTarget([2, 5, 3, 10], 30))
 
 def main():
-    print(resultObject.happyNum(23))
-    print(resultObject.happyNum(12))
-    print(resultObject.happyNum(1045673))
+    head = Node(2)
+    head.next = Node(4)
+    head.next.next = Node(6)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(2)
+    print("Is palindrome: " + str(resultObject.isPalindrome(head)))
+
 
 main()
