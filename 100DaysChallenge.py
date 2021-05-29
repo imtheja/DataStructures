@@ -456,18 +456,41 @@ class HundredDaysChallenge:
         linkedLSecondHalfCopy = linkedLSecondHalf
 
         while head is not None and linkedLSecondHalf is not None:
-            print(head.value)
             if head.value != linkedLSecondHalf.value:
                 break
             head=head.next
             linkedLSecondHalf=linkedLSecondHalf.next
 
 
-
+        resultObject.reverseLinkedList(linkedLSecondHalfCopy)
         if head is None or linkedLSecondHalf is None:
             return True
 
         return False
+
+    def rearrangeALinkedList(self, head):
+        if head is None or head.next is None:
+            return
+
+        linkedLS, linkedLF = head, head
+        while linkedLF is not None and linkedLF.next is not None:
+            linkedLF=linkedLF.next.next
+            linkedLS=linkedLS.next
+
+        linkedLSHalf=resultObject.reverseLinkedList(linkedLS)
+        linkedLFHalf=head
+        while linkedLFHalf is not None and linkedLSHalf is not None:
+            temp = linkedLFHalf.next
+            linkedLFHalf.next=linkedLSHalf
+            linkedLFHalf = temp
+
+            temp = linkedLSHalf.next
+            linkedLSHalf.next=linkedLFHalf
+            linkedLSHalf = temp
+
+        if linkedLFHalf is not None:
+            linkedLFHalf.next = None
+
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -489,12 +512,14 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.subarrayPLessThanTarget([2, 5, 3, 10], 30))
 
 def main():
-    head = Node(2)
-    head.next = Node(4)
-    head.next.next = Node(6)
-    head.next.next.next = Node(4)
-    head.next.next.next.next = Node(2)
-    print("Is palindrome: " + str(resultObject.isPalindrome(head)))
+  head = Node(2)
+  head.next = Node(4)
+  head.next.next = Node(6)
+  head.next.next.next = Node(8)
+  head.next.next.next.next = Node(10)
+  head.next.next.next.next.next = Node(12)
+  resultObject.rearrangeALinkedList(head)
+  resultObject.printLinkedList(head)
 
 
 main()
