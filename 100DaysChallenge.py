@@ -4,6 +4,11 @@ class Node:
         self.value = value
         self.next= next
 
+class interval:
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+
 class HundredDaysChallenge:
     # Pattern Sliding Window
     '''Given an array of positive numbers and a positive number ‘k’,
@@ -491,6 +496,56 @@ class HundredDaysChallenge:
         if linkedLFHalf is not None:
             linkedLFHalf.next = None
 
+    def findNextIndex(self, intIndex, CycleDirection, arr):
+        strDirection = arr[intIndex] >= 0
+        if CycleDirection != strDirection:
+            return -1
+        intNextIndex=(intIndex + arr[intIndex]) % len(arr)
+
+        if intNextIndex == intIndex:
+            return -1
+        return intNextIndex
+
+
+    def cycleInCircularArray(self, arr):
+        for i in range(len(arr)):
+            booleanCycleDirection = arr[i] >= 0
+            intSlowIndex, intFastIndex = i, i
+
+            while True:
+                intSlowIndex = resultObject.findNextIndex(intSlowIndex, booleanCycleDirection, arr)
+                intFastIndex = resultObject.findNextIndex(intFastIndex, booleanCycleDirection, arr)
+
+                if intFastIndex != -1:
+                    intFastIndex = resultObject.findNextIndex(intFastIndex, booleanCycleDirection, arr)
+                    #print("intFastIndex: ", intFastIndex)
+                    #print("intSlowIndex: ", intSlowIndex)
+                if intFastIndex ==-1 or intSlowIndex ==-1 or intFastIndex == intSlowIndex:
+                    break
+
+            if intSlowIndex != -1 and intSlowIndex == intFastIndex:
+                return True
+        return False
+
+    "Merge Intervals Concept"
+    def mergerIntervals(self, intervals):
+        if len(intervals) < 2:
+            return intervals
+
+        intervalMerged=[]
+        intervals.sort(key=lambda x: x.start)
+        start = intervals[0].start
+        end = intervals[0].end
+        for i in range(1, len(intervals)):
+            interval = intervals[i]
+            if interval.start <= end:
+                end = max(interval.end, end)
+            else:
+                intervalMerged.append([start, end])
+                start = interval.start
+                end = interval.end
+        intervalMerged.append([start, end])
+        return intervalMerged
 resultObject=HundredDaysChallenge()
 #print(resultObject.maximumSubarraySumOfK([2, 3, 4, 1, 5], 2))
 #print(resultObject.smallestSubarrarSumGreaterThank([3, 4, 1, 1, 6], 8))
@@ -512,14 +567,7 @@ resultObject=HundredDaysChallenge()
 #print(resultObject.subarrayPLessThanTarget([2, 5, 3, 10], 30))
 
 def main():
-  head = Node(2)
-  head.next = Node(4)
-  head.next.next = Node(6)
-  head.next.next.next = Node(8)
-  head.next.next.next.next = Node(10)
-  head.next.next.next.next.next = Node(12)
-  resultObject.rearrangeALinkedList(head)
-  resultObject.printLinkedList(head)
+    print(resultObject.mergerIntervals([interval(6, 7), interval(2, 4), interval(5, 9)]))
 
 
 main()
